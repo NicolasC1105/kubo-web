@@ -248,34 +248,33 @@
     <!-- Librería de Animaciones AOS -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
-    <!-- Inicialización Segura -->
+    <!-- Inicialización Segura para Producción -->
     <script>
-        window.addEventListener('load', function() {
-            // Inicializar texto dinámico
-            if(document.getElementById('typed-text')){
-                new Typed('#typed-text', {
-                    strings: ['Diseñadores e Ingenieros', 'Expertos en Prototipado Rápido', 'Ingeniería Biomédica 3D', 'Soluciones de Fabricación Digital'],
-                    typeSpeed: 50,
-                    backSpeed: 30,
-                    backDelay: 2000,
-                    loop: true,
-                    showCursor: true,
-                    cursorChar: '|'
-                });
-            }
+        // 1. Iniciamos el texto dinámico al instante
+        if(document.getElementById('typed-text')){
+            new Typed('#typed-text', {
+                strings: ['Diseñadores e Ingenieros', 'Expertos en Prototipado Rápido', 'Ingeniería Biomédica 3D', 'Soluciones de Fabricación Digital'],
+                typeSpeed: 50,
+                backSpeed: 30,
+                backDelay: 2000,
+                loop: true,
+                showCursor: true,
+                cursorChar: '|'
+            });
+        }
 
-            // Inicializar las animaciones de AOS con un retraso para asegurar que Tailwind ya pintó todo
-            setTimeout(function() {
-                AOS.init({
-                    once: true,
-                    offset: 50,
-                    duration: 800,
-                    easing: 'ease-out-cubic',
-                });
-                // Un refresh extra por si acaso
-                AOS.refresh();
-            }, 300);
+        // 2. Iniciamos AOS de inmediato
+        AOS.init({
+            once: true,
+            offset: 50,
+            duration: 800,
+            easing: 'ease-out-cubic',
         });
+        
+        // 3. Forzamos un recálculo para asegurarnos de que todo se muestre
+        setTimeout(function() {
+            AOS.refresh();
+        }, 500);
     </script>
 
     <!-- Script del Motor 3D (Three.js) -->
