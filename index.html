@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KUBO STUDIO 3D | Cotizador</title>
+    <style>
+        /* Paleta de colores basada en KUBO STUDIO */
+        :root {
+            --fondo-oscuro: #09090b; /* Fondo casi negro */
+            --morado-kubo: #7c3aed; /* Morado vibrante */
+            --texto-claro: #f8fafc; /* Blanco para textos */
+            --gris-card: #18181b; /* Fondo de las tarjetas */
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: var(--fondo-oscuro);
+            color: var(--texto-claro);
+            margin: 0;
+            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+
+        .contenedor {
+            background-color: var(--gris-card);
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 10px 30px rgba(124, 58, 237, 0.15); /* Sombra morada tenue */
+            max-width: 450px;
+            width: 100%;
+            border: 1px solid rgba(124, 58, 237, 0.2);
+        }
+
+        .header-logo {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        h1 {
+            text-align: center;
+            font-size: 28px;
+            margin-bottom: 5px;
+            color: var(--texto-claro);
+        }
+        
+        h1 span {
+            color: var(--morado-kubo);
+        }
+
+        p.bajada {
+            text-align: center;
+            color: #a1a1aa;
+            margin-bottom: 30px;
+            font-size: 15px;
+        }
+
+        label {
+            display: block;
+            font-weight: 600;
+            font-size: 14px;
+            color: #e4e4e7;
+            margin-bottom: 8px;
+            margin-top: 15px;
+        }
+
+        .input-campo {
+            width: 100%;
+            padding: 12px;
+            font-size: 15px;
+            background-color: #27272a;
+            border: 1px solid #3f3f46;
+            color: var(--texto-claro);
+            border-radius: 8px;
+            box-sizing: border-box; /* Evita que el padding rompa el ancho */
+            transition: border-color 0.3s;
+        }
+
+        .input-campo:focus {
+            outline: none;
+            border-color: var(--morado-kubo);
+        }
+
+        /* Estilo especial para el input de archivo */
+        input[type="file"] {
+            padding: 8px;
+            background-color: #27272a;
+            color: #a1a1aa;
+        }
+        
+        input[type="file"]::file-selector-button {
+            background-color: var(--morado-kubo);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .boton-compra {
+            background-color: var(--morado-kubo);
+            color: white;
+            padding: 16px;
+            font-size: 18px;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            margin-top: 30px;
+            width: 100%;
+            font-weight: bold;
+            transition: background-color 0.3s, transform 0.1s;
+        }
+
+        .boton-compra:hover {
+            background-color: #6d28d9;
+        }
+        
+        .boton-compra:active {
+            transform: scale(0.98);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="contenedor">
+        <div class="header-logo">
+            <!-- Icono simulando el cubo -->
+            <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="#7c3aed" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                <line x1="12" y1="22.08" x2="12" y2="12"></line>
+            </svg>
+        </div>
+        
+        <h1>KUBO <span>STUDIO 3D</span></h1>
+        <p class="bajada">Transformamos tus ideas en prototipos físicos.</p>
+        
+        <label>Nombre y Apellido:</label>
+        <input type="text" id="nombreCliente" class="input-campo" placeholder="¿Cómo te llamas?">
+
+        <label>Número de WhatsApp:</label>
+        <input type="text" id="telefonoCliente" class="input-campo" placeholder="Para enviarte la cotización">
+
+        <label>Material y Color:</label>
+        <select id="materialColor" class="input-campo">
+            <option value="PLA Blanco">PLA Blanco</option>
+            <option value="PLA Negro">PLA Negro</option>
+            <option value="PETG Transparente">PETG Transparente</option>
+            <option value="ABS Gris">ABS Gris</option>
+            <option value="Resina (Alta Detalle)">Resina (Alta Detalle)</option>
+        </select>
+
+        <label>Archivo 3D (.STL o .OBJ):</label>
+        <input type="file" id="archivo3d" class="input-campo" accept=".stl, .obj">
+
+        <button class="boton-compra" onclick="enviarPedido()">Solicitar Cotización</button>
+    </div>
+
+    <script>
+        function enviarPedido() {
+            const nombre = document.getElementById("nombreCliente").value;
+            const telefono = document.getElementById("telefonoCliente").value;
+            const material = document.getElementById("materialColor").value;
+            const archivoInput = document.getElementById("archivo3d");
+            
+            // Validaciones
+            if (!nombre || !telefono) {
+                alert("Por favor, completa tus datos de contacto.");
+                return;
+            }
+            if (archivoInput.files.length === 0) {
+                alert("No olvides subir tu archivo 3D para poder cotizar.");
+                return;
+            }
+
+            const archivo = archivoInput.files[0];
+            const boton = document.querySelector(".boton-compra");
+            
+            // Cambiamos el texto del botón mientras carga
+            boton.innerText = "Enviando archivo...";
+            boton.style.backgroundColor = "#52525b"; // Gris mientras carga
+            boton.disabled = true;
+
+            const formData = new FormData();
+            formData.append("nombre", nombre);
+            formData.append("telefono", telefono);
+            formData.append("material", material);
+            formData.append("archivo", archivo);
+
+            // ¡IMPORTANTE! Aquí debes poner el enlace verde que te dio Render
+            const url_render = "https://kubo-backend.onrender.com/test-pedido/";
+
+            fetch(url_render, { 
+                method: "POST",
+                body: formData 
+            })
+            .then(response => {
+                if(response.ok) {
+                    alert("¡Genial! Hemos recibido tu diseño. Te contactaremos por WhatsApp con la cotización.");
+                    // Limpiamos el formulario
+                    document.getElementById("nombreCliente").value = "";
+                    document.getElementById("telefonoCliente").value = "";
+                    archivoInput.value = "";
+                } else {
+                    alert("Hubo un problema al enviar el pedido.");
+                }
+            })
+            .catch(error => {
+                alert("Hubo un error de conexión con el servidor.");
+            })
+            .finally(() => {
+                // Restauramos el botón
+                boton.innerText = "Solicitar Cotización";
+                boton.style.backgroundColor = "var(--morado-kubo)";
+                boton.disabled = false;
+            });
+        }
+    </script>
+
+</body>
+</html>
