@@ -32,6 +32,9 @@
         @keyframes imprimirTexto { 0% { clip-path: polygon(0 0, 0 0, 0 100%, 0% 100%); } 100% { clip-path: polygon(0 0, 100% 0, 100% 100%, 0 100%); } }
         @keyframes moverExtrusor { 0% { left: 0%; } 100% { left: 100%; } }
         @keyframes filamento { 0% { height: 0; opacity: 1; } 50% { height: 12px; opacity: 1; } 51% { opacity: 0; } 100% { opacity: 0; } }
+        input[type=range].gen-slider { -webkit-appearance: none; background: #3f3f46; height: 6px; border-radius: 4px; outline: none; }
+        input[type=range].gen-slider::-webkit-slider-thumb { -webkit-appearance: none; width: 18px; height: 18px; border-radius: 50%; background: #7c3aed; cursor: pointer; transition: transform 0.1s; }
+        input[type=range].gen-slider::-webkit-slider-thumb:hover { transform: scale(1.2); }
     </style>
 </head>
 <body id="cuerpo" class="bg-kubodark text-white min-h-screen flex flex-col relative bg-grid overflow-hidden">
@@ -62,10 +65,7 @@
             </div>
 
             <div class="flex items-center gap-4">
-                <a href="https://wa.me/51993692355" target="_blank" class="text-gray-400 hover:text-green-500 transition-colors hidden md:block">
-                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
-                </a>
-                <button onclick="cambiarVista('vista-cotizador')" class="bg-kubo hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm ml-2 transition-all shadow-[0_0_15px_rgba(124,58,237,0.4)]">Iniciar Proyecto</button>
+                <button onclick="cambiarVista('vista-menu-proyecto')" class="bg-kubo hover:bg-purple-600 text-white font-bold py-2 px-4 rounded-lg text-sm ml-2 transition-all shadow-[0_0_15px_rgba(124,58,237,0.4)]">Iniciar Proyecto</button>
             </div>
         </div>
     </nav>
@@ -74,7 +74,6 @@
     <!-- VISTA 1: PRINCIPAL -->
     <!-- ========================================== -->
     <div id="vista-principal" class="vista-app transition-opacity duration-500">
-        
         <header class="max-w-4xl mx-auto px-6 py-20 text-center" data-aos="zoom-in" data-aos-duration="1000">
             <div class="inline-block bg-kubo/10 text-kubo font-bold px-4 py-2 rounded-full text-sm mb-6 border border-kubo/30 shadow-[0_0_15px_rgba(124,58,237,0.2)]">
                 <span id="typed-text"></span>
@@ -85,110 +84,88 @@
             <p class="text-lg md:text-xl text-kubotext max-w-2xl mx-auto mb-10">
                 Somos un estudio especializado en diseño, modelado e impresión 3D. Desarrollamos desde prototipos de ingeniería médica hasta piezas complejas a medida.
             </p>
-            <button onclick="cambiarVista('vista-cotizador')" class="bg-white text-kubodark hover:bg-gray-200 font-extrabold py-3 px-8 rounded-lg transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] transform hover:-translate-y-1 text-lg">
-                Cotizar Diseño 3D
+            <button onclick="cambiarVista('vista-menu-proyecto')" class="bg-white text-kubodark hover:bg-gray-200 font-extrabold py-3 px-8 rounded-lg transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] transform hover:-translate-y-1 text-lg">
+                Cotizar Proyecto
             </button>
         </header>
 
-        <!-- PROCESO DE TRABAJO (CÓMO FUNCIONA) CON ICONOS SVG -->
         <section class="max-w-6xl mx-auto px-6 py-12 border-t border-gray-800/50">
             <h2 class="text-3xl font-bold mb-12 text-center" data-aos="fade-up">¿Cómo funciona?</h2>
             <div class="grid grid-cols-1 md:grid-cols-4 gap-6 text-center">
                 <div data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-16 h-16 mx-auto bg-kubocard border border-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg>
-                    </div>
-                    <h3 class="font-bold text-lg mb-2">1. Cotiza tu archivo</h3>
-                    <p class="text-sm text-kubotext">Sube tu diseño 3D en nuestra plataforma y obtén un estimado instantáneo.</p>
+                    <div class="w-16 h-16 mx-auto bg-kubocard border border-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-8l-4-4m0 0L8 8m4-4v12"></path></svg></div>
+                    <h3 class="font-bold text-lg mb-2">1. Cotiza tu proyecto</h3>
+                    <p class="text-sm text-kubotext">Sube tu diseño 3D o foto en nuestra plataforma para que lo evaluemos.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-16 h-16 mx-auto bg-kubocard border border-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-kubocard border border-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg></div>
                     <h3 class="font-bold text-lg mb-2">2. Validación técnica</h3>
-                    <p class="text-sm text-kubotext">Nuestro equipo revisa la geometría y viabilidad del modelo por WhatsApp.</p>
+                    <p class="text-sm text-kubotext">Nuestro equipo revisa la geometría y el modelado CAD para asegurar tolerancia.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-16 h-16 mx-auto bg-kubo/20 border border-kubo rounded-full flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(124,58,237,0.3)]">
-                        <svg class="w-7 h-7 text-kubo" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-kubo/20 border border-kubo rounded-full flex items-center justify-center mb-4 shadow-[0_0_15px_rgba(124,58,237,0.3)]"><svg class="w-7 h-7 text-kubo" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4"></path></svg></div>
                     <h3 class="font-bold text-lg mb-2">3. Fabricación Digital</h3>
                     <p class="text-sm text-kubotext">Imprimimos tu pieza con los más altos estándares de calidad y resolución.</p>
                 </div>
                 <div data-aos="fade-up" data-aos-delay="400">
-                    <div class="w-16 h-16 mx-auto bg-kubocard border border-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg">
-                        <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg>
-                    </div>
+                    <div class="w-16 h-16 mx-auto bg-kubocard border border-gray-700 rounded-full flex items-center justify-center mb-4 shadow-lg"><svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 8h14M5 8a2 2 0 110-4h14a2 2 0 110 4M5 8v10a2 2 0 002 2h10a2 2 0 002-2V8m-9 4h4"></path></svg></div>
                     <h3 class="font-bold text-lg mb-2">4. Entrega Segura</h3>
                     <p class="text-sm text-kubotext">Recibe tu producto terminado directamente en tus manos o vía courier.</p>
                 </div>
             </div>
         </section>
 
-        <!-- SECCIÓN: ESPECIALIDADES CON ICONOS SVG -->
         <section id="especialidades" class="max-w-6xl mx-auto px-6 py-16 border-t border-gray-800/50">
             <h2 class="text-3xl font-bold mb-4 text-center" data-aos="fade-up">Nuestras Especialidades</h2>
             <p class="text-kubotext text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Desarrollamos soluciones tecnológicas integrales adaptadas a las exigencias de tu proyecto.</p>
-            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <!-- Tarjeta 1: Proyectos Académicos -->
                 <div class="bg-[#111113] p-8 rounded-2xl border border-gray-800 hover:border-kubo transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="100">
-                    <div class="w-14 h-14 bg-kubo/20 rounded-xl flex items-center justify-center mb-6 border border-kubo/50">
-                        <svg class="w-7 h-7 text-kubo" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg>
-                    </div>
+                    <div class="w-14 h-14 bg-kubo/20 rounded-xl flex items-center justify-center mb-6 border border-kubo/50"><svg class="w-7 h-7 text-kubo" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 14l9-5-9-5-9 5 9 5zm0 0l6.16-3.422a12.083 12.083 0 01.665 6.479A11.952 11.952 0 0012 20.055a11.952 11.952 0 00-6.824-2.998 12.078 12.078 0 01.665-6.479L12 14zm-4 6v-7.5l4-2.222"></path></svg></div>
                     <h3 class="font-bold text-xl mb-3 text-white">Proyectos Universitarios</h3>
-                    <p class="text-sm text-kubotext">Ayuda integral en el diseño, modelado e impresión 3D para tu trabajo final de curso o tesis. Transformamos tus ideas académicas en prototipos funcionales.</p>
+                    <p class="text-sm text-kubotext">Ayuda integral en el diseño, modelado e impresión 3D para tu trabajo final de curso o tesis. Transformamos tus ideas en prototipos funcionales.</p>
                 </div>
-                
-                <!-- Tarjeta 2: Hardware e IoT -->
                 <div class="bg-[#111113] p-8 rounded-2xl border border-gray-800 hover:border-blue-500 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 border border-blue-500/50">
-                        <svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg>
-                    </div>
+                    <div class="w-14 h-14 bg-blue-500/20 rounded-xl flex items-center justify-center mb-6 border border-blue-500/50"><svg class="w-7 h-7 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z"></path></svg></div>
                     <h3 class="font-bold text-xl mb-3 text-white">Hardware e IoT</h3>
-                    <p class="text-sm text-kubotext">Estructuras funcionales diseñadas para alojar placas (Arduino, Raspberry Pi, ESP32), engranajes y mecanismos robóticos con alta resistencia térmica.</p>
+                    <p class="text-sm text-kubotext">Estructuras funcionales diseñadas para alojar placas (Arduino, Raspberry Pi, ESP32), engranajes y mecanismos robóticos.</p>
                 </div>
-
-                <!-- Tarjeta 3: Modelado de Precisión -->
                 <div class="bg-[#111113] p-8 rounded-2xl border border-gray-800 hover:border-pink-500 transition-all duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                    <div class="w-14 h-14 bg-pink-500/20 rounded-xl flex items-center justify-center mb-6 border border-pink-500/50">
-                        <svg class="w-7 h-7 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg>
-                    </div>
+                    <div class="w-14 h-14 bg-pink-500/20 rounded-xl flex items-center justify-center mb-6 border border-pink-500/50"><svg class="w-7 h-7 text-pink-500" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"></path></svg></div>
                     <h3 class="font-bold text-xl mb-3 text-white">Modelado de Precisión</h3>
-                    <p class="text-sm text-kubotext">Creación de piezas a medida, repuestos descontinuados, maquetas arquitectónicas y esculturas complejas optimizadas para impresión FDM y Resina.</p>
+                    <p class="text-sm text-kubotext">Creación de piezas a medida, repuestos descontinuados, maquetas arquitectónicas y esculturas optimizadas para impresión FDM y Resina.</p>
                 </div>
             </div>
         </section>
 
-        <!-- Portafolio -->
+        <!-- PORTAFOLIO -->
         <section id="portafolio" class="max-w-6xl mx-auto px-6 py-16 border-t border-gray-800/50">
             <h2 class="text-3xl font-bold mb-10 text-center" data-aos="fade-up">Nuestro Trabajo</h2>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-kubocard rounded-xl border border-gray-800 hover:border-kubo transition-colors duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="100" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
                     <div class="h-64 bg-[#111113] rounded-t-xl flex items-center justify-center p-4 relative overflow-hidden group">
-                        <img src="dragon.jpeg" onerror="this.onerror=null; this.src='dragon.jpg'" alt="Dragón 3D" class="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
+                        <img src="escultura.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/18181b/ffffff?text=Escultura'" alt="Escultura 3D" class="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6">
-                        <h3 class="font-bold text-lg">Escultura Compleja</h3>
-                        <p class="text-sm text-kubotext mt-2">Modelado y optimización de geometría avanzada para proyectos de alto detalle.</p>
+                        <h3 class="font-bold text-lg text-white">Escultura y Arte Conceptual</h3>
+                        <p class="text-sm text-kubotext mt-2">Materializamos tus ideas más ambiciosas con una precisión nanométrica. Ideales para coleccionismo, exhibiciones o decoración exclusiva, capturando cada detalle de tu visión artística con acabados de primera calidad.</p>
                     </div>
                 </div>
                 <div class="bg-kubocard rounded-xl border border-gray-800 hover:border-kubo transition-colors duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="200" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
                     <div class="h-64 bg-[#111113] rounded-t-xl flex items-center justify-center p-4 relative overflow-hidden group">
-                        <img src="neurona.jpeg" onerror="this.onerror=null; this.src='neurona.jpg'" alt="Modelo Neurona" class="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
+                        <img src="llavero.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/18181b/ffffff?text=Accesorios'" alt="Llaveros y Accesorios" class="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6">
-                        <h3 class="font-bold text-lg">Modelos Anatómicos</h3>
-                        <p class="text-sm text-kubotext mt-2">Diseño de representaciones biomédicas para estudio, planificación o exhibición.</p>
+                        <h3 class="font-bold text-lg text-white">Accesorios para Eventos</h3>
+                        <p class="text-sm text-kubotext mt-2">Destaca tu marca o evento con merchandising completamente personalizado. Fabricamos llaveros, pines y accesorios en serie, garantizando resistencia mecánica y un diseño único que tus invitados recordarán.</p>
                     </div>
                 </div>
                 <div class="bg-kubocard rounded-xl border border-gray-800 hover:border-kubo transition-colors duration-300 shadow-xl" data-aos="fade-up" data-aos-delay="300" data-tilt data-tilt-max="10" data-tilt-speed="400" data-tilt-glare data-tilt-max-glare="0.3">
                     <div class="h-64 bg-[#111113] rounded-t-xl flex items-center justify-center p-4 relative overflow-hidden group">
-                        <img src="figura.jpeg" onerror="this.onerror=null; this.src='figura.jpg'" alt="Prototipo Impreso" class="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
+                        <img src="mano.jpg" onerror="this.onerror=null; this.src='https://placehold.co/400x400/18181b/ffffff?text=Biomedicina'" alt="Diseños Biomédicos" class="max-w-full max-h-full object-contain relative z-10 drop-shadow-2xl transform group-hover:scale-105 transition-transform duration-500">
                     </div>
                     <div class="p-6">
-                        <h3 class="font-bold text-lg">Prototipado Rápido</h3>
-                        <p class="text-sm text-kubotext mt-2">Impresión FDM funcional para pruebas de concepto, mecanismos y tolerancias.</p>
+                        <h3 class="font-bold text-lg text-white">Diseños Biomédicos y Órtesis</h3>
+                        <p class="text-sm text-kubotext mt-2">Desarrollamos prototipos biomecánicos, carcasas para instrumentación médica, órtesis a medida y modelos anatómicos funcionales, respetando estrictas tolerancias mecánicas para garantizar ensamblajes precisos.</p>
                     </div>
                 </div>
             </div>
@@ -198,7 +175,6 @@
         <section id="equipo" class="max-w-6xl mx-auto px-6 py-16 border-t border-gray-800/50">
             <h2 class="text-3xl font-bold mb-4 text-center" data-aos="fade-up">El equipo detrás de Kubo</h2>
             <p class="text-kubotext text-center mb-12 max-w-2xl mx-auto" data-aos="fade-up" data-aos-delay="100">Un grupo multidisciplinario de ingenieros y diseñadores apasionados por la tecnología.</p>
-            
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
                 <div class="bg-kubocard p-6 rounded-xl text-center border border-gray-800 relative shadow-xl" data-aos="fade-up" data-aos-delay="100">
                     <img src="alejandro.jpeg" onerror="this.onerror=null; this.src='alejandro.jpg'" alt="Alejandro Pari" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-kubodark mb-4" style="object-position: 50% 15%;">
@@ -207,13 +183,13 @@
                     <p class="text-sm text-kubotext">Lidera la visión estratégica del estudio, coordinando la integración de nuevas tecnologías y asegurando los estándares de calidad.</p>
                 </div>
                 <div class="bg-kubocard p-6 rounded-xl text-center border border-gray-800 relative shadow-xl" data-aos="fade-up" data-aos-delay="200">
-                    <img src="nicolas.jpeg" onerror="this.onerror=null; this.src='nicolas.jpg'" alt="Nicolas Correa" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-kubodark mb-4" style="object-position: 50% 30%;">
+                    <img src="nicolas.jpeg" onerror="this.onerror=null; this.src='nicolas.jpg'" alt="Nicolas Correa" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-kubodark mb-4" style="object-position: 50% 50%;">
                     <h3 class="font-bold text-xl">Nicolas Correa</h3>
                     <p class="text-kubo font-semibold text-sm mb-3">Diseñador e Ingeniero</p>
-                    <p class="text-sm text-kubotext">Especialista en modelado 3D e integración electrónica. Aporta visión clínica y operativa gracias a su experiencia en ejecución de proyectos en el Hospital Loayza.</p>
+                    <p class="text-sm text-kubotext">Desarrollador principal de nuestra plataforma web y experto en modelado 3D. Fusiona su profundo conocimiento en el diseño de dispositivos médicos con la integración de hardware para crear soluciones tecnológicas innovadoras.</p>
                 </div>
                 <div class="bg-kubocard p-6 rounded-xl text-center border border-gray-800 relative shadow-xl" data-aos="fade-up" data-aos-delay="300">
-                    <img src="rosangela.jpeg" onerror="this.onerror=null; this.src='rosangela.jpg'" alt="Rosangela Yampufé" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-kubodark mb-4" style="object-position: 50% 25%;">
+                    <img src="rosangela.jpeg" onerror="this.onerror=null; this.src='rosangela.jpg'" alt="Rosangela Yampufé" class="w-32 h-32 rounded-full mx-auto object-cover border-4 border-kubodark mb-4" style="object-position: 50% 50%;">
                     <h3 class="font-bold text-xl">Rosangela Yampufé</h3>
                     <p class="text-kubo font-semibold text-sm mb-3">Co-fundadora y COO</p>
                     <p class="text-sm text-kubotext">Enfocada en la dirección operativa del estudio, garantizando que cada proyecto se ejecute de manera eficiente y cumpla con estrictos criterios biomecánicos.</p>
@@ -223,115 +199,136 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- VISTA 2: COTIZADOR APP -->
+    <!-- VISTA 2: MENÚ DE DECISIÓN DE PROYECTO GIGANTE -->
     <!-- ========================================== -->
-    <div id="vista-cotizador" class="vista-app hidden min-h-screen py-10 px-4 md:px-8 transition-opacity duration-500">
-        <button onclick="cambiarVista('vista-principal')" class="text-gray-400 hover:text-white mb-6 flex items-center gap-2 transition-colors">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Volver al inicio
-        </button>
+    <div id="vista-menu-proyecto" class="vista-app hidden min-h-[80vh] py-16 px-6 transition-opacity duration-500 flex flex-col items-center justify-center relative">
+        <div class="w-full max-w-5xl mb-8 flex justify-start">
+            <button onclick="cambiarVista('vista-principal')" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-kubo text-white font-bold py-3 px-6 rounded-full transition-all shadow-lg transform hover:-translate-y-1">
+                <svg width="24" height="24" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 
+                Volver a Inicio
+            </button>
+        </div>
+
+        <h2 class="text-4xl md:text-5xl font-extrabold mb-4 text-center">¿Qué necesitas hoy?</h2>
+        <p class="text-kubotext mb-12 text-center text-lg max-w-2xl">Selecciona la opción que mejor describa en qué etapa se encuentra tu proyecto.</p>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-5xl w-full">
+            <div onclick="cambiarVista('vista-impresion')" class="bg-[#1c1c21] border border-gray-700 rounded-3xl p-10 cursor-pointer hover:border-kubo hover:shadow-[0_0_40px_rgba(124,58,237,0.3)] transition-all transform hover:-translate-y-2 group text-center">
+                <div class="w-24 h-24 mx-auto bg-kubo/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-kubo/20 transition-colors">
+                    <span class="text-5xl">🖨️</span>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">Ya tengo mi diseño para imprimir</h3>
+                <p class="text-gray-400 text-lg">Tengo un archivo .STL o .OBJ listo. Solo quiero enviarlo para su fabricación y evaluación técnica.</p>
+            </div>
+
+            <div onclick="cambiarVista('vista-diseno')" class="bg-[#1c1c21] border border-gray-700 rounded-3xl p-10 cursor-pointer hover:border-blue-500 hover:shadow-[0_0_40px_rgba(59,130,246,0.3)] transition-all transform hover:-translate-y-2 group text-center">
+                <div class="w-24 h-24 mx-auto bg-blue-500/10 rounded-full flex items-center justify-center mb-6 group-hover:bg-blue-500/20 transition-colors">
+                    <span class="text-5xl">✏️</span>
+                </div>
+                <h3 class="text-3xl font-bold text-white mb-4">Quiero que me ayuden a diseñar</h3>
+                <p class="text-gray-400 text-lg">Tengo una foto, un plano, un boceto o necesito generar una carcasa electrónica desde cero.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VISTA 3A: COTIZADOR DE IMPRESIÓN (SOLO STL) -->
+    <!-- ========================================== -->
+    <div id="vista-impresion" class="vista-app hidden min-h-screen py-10 px-4 md:px-8 transition-opacity duration-500">
+        
+        <div class="max-w-6xl mx-auto mb-6 flex justify-start">
+            <button onclick="cambiarVista('vista-menu-proyecto')" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-5 rounded-full transition-all shadow-md transform hover:-translate-y-1">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 
+                Cambiar de modo
+            </button>
+        </div>
 
         <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
-            <!-- COLUMNA IZQUIERDA -->
             <div class="lg:col-span-5 bg-kubocard border border-gray-800 rounded-2xl p-6 shadow-2xl relative">
-                <h2 class="text-2xl font-bold mb-6">Configura tu Proyecto</h2>
-
+                <h2 class="text-2xl font-bold mb-6">Envío de Diseño 3D</h2>
                 <div class="space-y-6 relative z-10">
-                    <!-- CARGA DE ARCHIVO -->
                     <div>
-                        <label class="block text-sm font-semibold text-gray-300 mb-2">1. Sube tu archivo 3D (.STL)</label>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">1. Sube tu archivo (.STL o .OBJ)</label>
                         <div class="w-full bg-[#1c1c21] border-2 border-dashed border-gray-700 rounded-xl p-6 text-center hover:border-kubo transition-colors relative">
-                            <input type="file" id="archivo3d" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="*/*">
+                            <input type="file" id="archivo3d-impresion" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept=".stl,.obj">
                             <svg class="mx-auto h-10 w-10 text-gray-500 mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 16a4 4 0 01-.88-7.903A5 5 0 1115.9 6L16 6a5 5 0 011 9.9M15 13l-3-3m0 0l-3 3m3-3v12"></path></svg>
-                            <span class="text-sm text-gray-400 font-bold" id="nombre-archivo-visual">Haz clic o arrastra tu archivo aquí</span>
+                            <span class="text-sm text-gray-400 font-bold" id="nombre-archivo-impresion">Haz clic o arrastra tu archivo aquí</span>
                         </div>
-                        <p id="visor-aviso" class="text-xs text-yellow-400 mt-2 hidden"></p>
                     </div>
 
-                    <!-- MATERIAL -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-300 mb-2">2. Material de Fabricación</label>
                         <div class="grid grid-cols-2 gap-3">
-                            <div onclick="seleccionarMaterial('PLA', this)" class="mat-card cursor-pointer border-2 border-kubo bg-kubo/10 rounded-lg p-3 text-center transition-all">
-                                <span class="font-bold text-white block text-sm">PLA</span>
-                                <span class="text-xs text-kubotext">Estándar</span>
-                            </div>
-                            <div onclick="seleccionarMaterial('PETG', this)" class="mat-card cursor-pointer border-2 border-gray-800 bg-[#27272a] rounded-lg p-3 text-center transition-all">
-                                <span class="font-bold text-white block text-sm">PETG</span>
-                                <span class="text-xs text-kubotext">Resistente</span>
-                            </div>
-                            <div onclick="seleccionarMaterial('ABS', this)" class="mat-card cursor-pointer border-2 border-gray-800 bg-[#27272a] rounded-lg p-3 text-center transition-all">
-                                <span class="font-bold text-white block text-sm">ABS</span>
-                                <span class="text-xs text-kubotext">Térmico</span>
-                            </div>
-                            <div onclick="seleccionarMaterial('Resina', this)" class="mat-card cursor-pointer border-2 border-gray-800 bg-[#27272a] rounded-lg p-3 text-center transition-all">
-                                <span class="font-bold text-white block text-sm">Resina</span>
-                                <span class="text-xs text-kubotext">Detalle alto</span>
-                            </div>
+                            <div onclick="selMatImp('PLA', this)" class="mat-card-imp cursor-pointer border-2 border-kubo bg-kubo/10 rounded-lg p-3 text-center"><span class="font-bold text-white block text-sm">PLA</span></div>
+                            <div onclick="selMatImp('PETG', this)" class="mat-card-imp cursor-pointer border-2 border-gray-800 bg-[#27272a] rounded-lg p-3 text-center"><span class="font-bold text-white block text-sm">PETG</span></div>
+                            <div onclick="selMatImp('ABS', this)" class="mat-card-imp cursor-pointer border-2 border-gray-800 bg-[#27272a] rounded-lg p-3 text-center"><span class="font-bold text-white block text-sm">ABS</span></div>
+                            <div onclick="selMatImp('Resina', this)" class="mat-card-imp cursor-pointer border-2 border-gray-800 bg-[#27272a] rounded-lg p-3 text-center"><span class="font-bold text-white block text-sm">Resina</span></div>
                         </div>
-                        <input type="hidden" id="materialOculto" value="PLA">
+                        <input type="hidden" id="matImpOculto" value="PLA">
                     </div>
 
-                    <!-- SELECTOR DE COLOR EXPANDIDO -->
                     <div>
                         <label class="block text-sm font-semibold text-gray-300 mb-2">3. Color del Filamento</label>
-                        <div class="flex flex-wrap gap-3 mt-2">
-                            <button onclick="cambiarColorSTL(0x7c3aed, 'Morado Kubo', this)" class="color-btn w-8 h-8 rounded-full bg-kubo ring-2 ring-white scale-110 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0xffffff, 'Blanco', this)" class="color-btn w-8 h-8 rounded-full bg-gray-100 border border-gray-300 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0x222222, 'Negro', this)" class="color-btn w-8 h-8 rounded-full bg-gray-800 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0x9ca3af, 'Gris', this)" class="color-btn w-8 h-8 rounded-full bg-gray-400 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0xef4444, 'Rojo', this)" class="color-btn w-8 h-8 rounded-full bg-red-500 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0x3b82f6, 'Azul', this)" class="color-btn w-8 h-8 rounded-full bg-blue-500 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0x22c55e, 'Verde', this)" class="color-btn w-8 h-8 rounded-full bg-green-500 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0xeab308, 'Amarillo', this)" class="color-btn w-8 h-8 rounded-full bg-yellow-500 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0xf97316, 'Naranja', this)" class="color-btn w-8 h-8 rounded-full bg-orange-500 shadow-lg transition-all hover:scale-110"></button>
-                            <button onclick="cambiarColorSTL(0xec4899, 'Rosa', this)" class="color-btn w-8 h-8 rounded-full bg-pink-500 shadow-lg transition-all hover:scale-110"></button>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button onclick="selColorImp(0x7c3aed, 'Morado Kubo', this)" class="color-btn-imp w-8 h-8 rounded-full bg-kubo ring-2 ring-white scale-110 shadow-lg"></button>
+                            <button onclick="selColorImp(0xffffff, 'Blanco', this)" class="color-btn-imp w-8 h-8 rounded-full bg-gray-100 border border-gray-300 shadow-lg"></button>
+                            <button onclick="selColorImp(0x222222, 'Negro', this)" class="color-btn-imp w-8 h-8 rounded-full bg-gray-800 shadow-lg"></button>
+                            <button onclick="selColorImp(0x9ca3af, 'Gris', this)" class="color-btn-imp w-8 h-8 rounded-full bg-gray-400 shadow-lg"></button>
+                            <button onclick="selColorImp(0xef4444, 'Rojo', this)" class="color-btn-imp w-8 h-8 rounded-full bg-red-500 shadow-lg"></button>
+                            <button onclick="selColorImp(0x3b82f6, 'Azul', this)" class="color-btn-imp w-8 h-8 rounded-full bg-blue-500 shadow-lg"></button>
+                            <button onclick="selColorImp(0x22c55e, 'Verde', this)" class="color-btn-imp w-8 h-8 rounded-full bg-green-500 shadow-lg"></button>
+                            <button onclick="selColorImp(0xeab308, 'Amarillo', this)" class="color-btn-imp w-8 h-8 rounded-full bg-yellow-500 shadow-lg"></button>
+                            <button onclick="selColorImp(0xf97316, 'Naranja', this)" class="color-btn-imp w-8 h-8 rounded-full bg-orange-500 shadow-lg"></button>
+                            <button onclick="selColorImp(0xec4899, 'Rosa', this)" class="color-btn-imp w-8 h-8 rounded-full bg-pink-500 shadow-lg"></button>
                         </div>
-                        <p class="text-xs text-kubotext mt-2" id="texto-color">Color seleccionado: Morado Kubo</p>
-                        <input type="hidden" id="colorOculto" value="Morado Kubo">
+                        <input type="hidden" id="colorImpOculto" value="Morado Kubo">
                     </div>
 
-                    <!-- CONTACTO -->
                     <div class="space-y-4 pt-4 border-t border-gray-800">
-                        <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-1">Nombre y Apellido</label>
-                            <input type="text" id="nombreCliente" placeholder="Ej: Ing. Luis Ramos" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <div><input type="text" id="nomImp" placeholder="Nombre y Apellido" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo"></div>
+                            <div><input type="text" id="telImp" placeholder="WhatsApp" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo"></div>
                         </div>
                         <div>
-                            <label class="block text-sm font-semibold text-gray-300 mb-1">Número de WhatsApp</label>
-                            <input type="text" id="telefonoCliente" placeholder="+51 999 999 999" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                            <input type="text" id="dirImp" placeholder="Dirección de entrega o envío" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                        </div>
+                        <div>
+                            <select id="pagoImp" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                                <option value="" disabled selected>Método de Pago Preferido...</option>
+                                <option value="Efectivo / Transferencia">Efectivo / Yape / Transferencia</option>
+                                <option value="Tarjeta">Tarjeta de Crédito / Débito</option>
+                            </select>
                         </div>
                     </div>
 
-                    <button id="btnEnviar" onclick="enviarPedido()" class="w-full bg-white text-kubodark hover:bg-gray-200 font-extrabold py-4 rounded-lg mt-4 transition-all shadow-[0_0_20px_rgba(255,255,255,0.2)] flex justify-center items-center gap-2 transform hover:scale-[1.02]">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
-                        <span>Enviar archivo a Ingeniería</span>
+                    <button id="btnEnviarImp" onclick="enviarPedidoImpresion()" class="w-full bg-white text-kubodark hover:bg-gray-200 font-extrabold py-4 rounded-lg mt-4 transition-all flex justify-center items-center gap-2">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg>
+                        <span>Enviar a Ingeniería para Cotizar</span>
                     </button>
                 </div>
             </div>
 
-            <!-- COLUMNA DERECHA -->
-            <div class="lg:col-span-7 flex flex-col gap-6">
+            <div class="lg:col-span-7 flex flex-col gap-6 relative">
                 <div class="bg-[#121214] border border-gray-800 rounded-2xl flex-grow relative overflow-hidden flex flex-col items-center justify-center min-h-[300px] shadow-inner">
-                    <div id="loading-3d" class="absolute text-gray-500 flex flex-col items-center gap-2">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path><polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline><line x1="12" y1="22.08" x2="12" y2="12"></line></svg>
+                    <div id="loading-3d-imp" class="absolute text-gray-500 flex flex-col items-center gap-2">
+                        <svg width="40" height="40" fill="none" stroke="currentColor" stroke-width="1"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
                         <span>Esperando archivo 3D...</span>
                     </div>
-                    <div id="visor3d-container" class="hidden absolute inset-0 cursor-move"></div>
+                    <div id="visor3d-imp" class="hidden absolute inset-0 cursor-move"></div>
                 </div>
 
-                <div class="bg-[#1c1c21] p-6 rounded-xl border border-gray-800 grid grid-cols-2 gap-4 items-center">
+                <!-- INFO SIN PRECIOS -->
+                <div class="bg-[#1c1c21] p-6 rounded-xl border border-gray-800 flex items-center justify-between">
                     <div>
-                        <span class="text-xs text-gray-500 uppercase font-bold tracking-wider">Caja Exterior (X,Y,Z)</span>
-                        <div class="text-lg font-bold text-white mt-1 flex items-center gap-2">
-                            <svg class="text-kubo" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path></svg>
-                            <span id="stl-dims">0.0 x 0.0 x 0.0 cm</span>
+                        <span class="text-xs text-gray-500 uppercase font-bold tracking-wider">Dimensiones de la Caja (X,Y,Z)</span>
+                        <div class="text-lg font-bold text-white mt-1">
+                            <span id="dims-imp">0.0 x 0.0 x 0.0 cm</span>
                         </div>
                     </div>
-                    <div class="text-right border-l border-gray-700 pl-4 relative overflow-hidden">
-                        <span class="text-xs text-kubotext uppercase font-bold tracking-wider">Estimación Automática</span>
-                        <div class="text-2xl md:text-3xl font-extrabold text-white mt-1 text-transparent bg-clip-text bg-gradient-to-r from-white to-gray-400" id="precio-estimado">S/ 0.00</div>
-                        <p class="text-[10px] text-gray-500 mt-1">*Cálculo referencial del volumen total. El costo bajará si la pieza es hueca.</p>
+                    <div class="text-right border-l border-gray-700 pl-4">
+                        <span class="text-xs text-kubotext uppercase font-bold tracking-wider">Estado de Cotización</span>
+                        <div class="text-xl md:text-2xl font-extrabold text-kubo mt-1">Por Evaluar</div>
+                        <p class="text-[10px] text-gray-500 mt-1">Evaluación manual de ingeniería.</p>
                     </div>
                 </div>
             </div>
@@ -339,13 +336,161 @@
     </div>
 
     <!-- ========================================== -->
-    <!-- VISTA 3: PREGUNTAS FRECUENTES (FAQ APP) -->
+    <!-- VISTA 3B: DEPARTAMENTO DE DISEÑO (TABS) -->
+    <!-- ========================================== -->
+    <div id="vista-diseno" class="vista-app hidden min-h-screen py-10 px-4 md:px-8 transition-opacity duration-500">
+        
+        <div class="max-w-6xl mx-auto mb-6 flex justify-start">
+            <button onclick="cambiarVista('vista-menu-proyecto')" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-5 rounded-full transition-all shadow-md transform hover:-translate-y-1">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 
+                Cambiar de modo
+            </button>
+        </div>
+
+        <!-- TABS GIGANTES -->
+        <div class="max-w-6xl mx-auto flex gap-2 p-1 bg-gray-900 rounded-xl mb-8 border border-gray-700">
+            <button id="tab-boceto" onclick="switchDisenoTab('boceto')" class="flex-1 py-3 text-sm md:text-lg font-bold rounded-lg bg-blue-600 text-white shadow-lg transition-all">Subir un Boceto/Plano</button>
+            <button id="tab-gen" onclick="switchDisenoTab('generador')" class="flex-1 py-3 text-sm md:text-lg font-bold rounded-lg text-gray-400 hover:text-white transition-all">Diseñar Caja/Carcasa Simple</button>
+        </div>
+
+        <!-- CONTENIDO: SUBIR BOCETO -->
+        <div id="contenido-boceto" class="max-w-3xl mx-auto bg-kubocard border border-gray-800 rounded-2xl p-8 shadow-2xl">
+            <h2 class="text-2xl font-bold mb-2">Servicio de Diseño CAD</h2>
+            <p class="text-kubotext text-sm mb-6">Sube una foto, plano a mano o imagen de referencia. Un ingeniero de Kubo evaluará las horas de modelado necesarias para tu proyecto.</p>
+
+            <div class="space-y-6">
+                <div>
+                    <label class="block text-sm font-semibold text-gray-300 mb-2">Sube tu Imagen (.JPG, .PNG, .PDF)</label>
+                    <div class="w-full bg-[#1c1c21] border-2 border-dashed border-gray-700 rounded-xl p-8 text-center hover:border-blue-500 transition-colors relative">
+                        <input type="file" id="archivo-boceto" class="absolute inset-0 w-full h-full opacity-0 cursor-pointer" accept="image/*,.pdf">
+                        <span class="text-5xl mb-4 block">📸</span>
+                        <span class="text-sm text-gray-400 font-bold" id="nombre-boceto">Haz clic o arrastra tu archivo aquí</span>
+                    </div>
+                </div>
+                <div class="space-y-4 pt-4 border-t border-gray-800">
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <input type="text" id="nomBoceto" placeholder="Tu Nombre y Apellido" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500">
+                        <input type="text" id="telBoceto" placeholder="WhatsApp" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <input type="text" id="dirBoceto" placeholder="Dirección de entrega o envío" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+                    </div>
+                    <div>
+                        <select id="pagoBoceto" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-blue-500">
+                            <option value="" disabled selected>Método de Pago Preferido...</option>
+                            <option value="Efectivo / Transferencia">Efectivo / Yape / Transferencia</option>
+                            <option value="Tarjeta">Tarjeta de Crédito / Débito</option>
+                        </select>
+                    </div>
+                </div>
+                <button id="btnEnviarBoceto" onclick="enviarPedidoBoceto()" class="w-full bg-blue-600 hover:bg-blue-700 text-white font-extrabold py-4 rounded-lg mt-4 transition-all">
+                    Solicitar Cotización de Diseño
+                </button>
+            </div>
+        </div>
+
+        <!-- CONTENIDO: GENERADOR PARAMÉTRICO -->
+        <div id="contenido-generador" class="hidden max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-8">
+            <div class="lg:col-span-4 bg-kubocard border border-gray-800 rounded-2xl p-6 shadow-2xl relative overflow-hidden">
+                <h2 class="text-2xl font-bold mb-2">Generador de Carcasas</h2>
+                <p class="text-xs text-kubotext mb-6">Ingresa las medidas y el sistema dibujará tu carcasa (con tapa) al instante para evaluación.</p>
+
+                <div class="space-y-5 relative z-10">
+                    <div>
+                        <div class="flex justify-between mb-1"><label class="text-sm font-semibold text-gray-300">Largo Exterior (X)</label><span id="val-largo" class="text-sm font-bold text-white">100 mm</span></div>
+                        <input type="range" id="gen-largo" min="20" max="250" value="100" class="w-full gen-slider" oninput="updateGeneratorBox()">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><label class="text-sm font-semibold text-gray-300">Ancho Exterior (Y)</label><span id="val-ancho" class="text-sm font-bold text-white">60 mm</span></div>
+                        <input type="range" id="gen-ancho" min="20" max="250" value="60" class="w-full gen-slider" oninput="updateGeneratorBox()">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><label class="text-sm font-semibold text-gray-300">Alto Interior (Z)</label><span id="val-alto" class="text-sm font-bold text-white">40 mm</span></div>
+                        <input type="range" id="gen-alto" min="10" max="150" value="40" class="w-full gen-slider" oninput="updateGeneratorBox()">
+                    </div>
+                    <div>
+                        <div class="flex justify-between mb-1"><label class="text-sm font-semibold text-gray-300">Grosor de Pared</label><span id="val-grosor" class="text-sm font-bold text-white">2.0 mm</span></div>
+                        <input type="range" id="gen-grosor" min="1" max="5" step="0.5" value="2" class="w-full gen-slider" oninput="updateGeneratorBox()">
+                    </div>
+
+                    <div class="pt-4 border-t border-gray-800">
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Material</label>
+                        <select id="gen-material" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-3 py-2 text-white focus:outline-none focus:border-kubo" onchange="updateGeneratorBox()">
+                            <option value="PLA">PLA (Estándar)</option>
+                            <option value="PETG">PETG (Resistencia Mecánica)</option>
+                            <option value="ABS">ABS (Resistencia Térmica)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-semibold text-gray-300 mb-2">Color del Filamento</label>
+                        <div class="flex flex-wrap gap-2 mt-2">
+                            <button onclick="selColorGen(0x7c3aed, 'Morado Kubo', this)" class="color-btn-gen w-6 h-6 rounded-full bg-kubo ring-2 ring-white scale-110 shadow-lg"></button>
+                            <button onclick="selColorGen(0xffffff, 'Blanco', this)" class="color-btn-gen w-6 h-6 rounded-full bg-gray-100 border border-gray-300 shadow-lg"></button>
+                            <button onclick="selColorGen(0x222222, 'Negro', this)" class="color-btn-gen w-6 h-6 rounded-full bg-gray-800 shadow-lg"></button>
+                            <button onclick="selColorGen(0x3b82f6, 'Azul', this)" class="color-btn-gen w-6 h-6 rounded-full bg-blue-500 shadow-lg"></button>
+                            <button onclick="selColorGen(0x22c55e, 'Verde', this)" class="color-btn-gen w-6 h-6 rounded-full bg-green-500 shadow-lg"></button>
+                            <button onclick="selColorGen(0xec4899, 'Rosa', this)" class="color-btn-gen w-6 h-6 rounded-full bg-pink-500 shadow-lg"></button>
+                        </div>
+                        <input type="hidden" id="colorGenOculto" value="Morado Kubo">
+                    </div>
+
+                    <div class="space-y-4 pt-4 border-t border-gray-800">
+                        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                            <input type="text" id="gen-nombre" placeholder="Nombre" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                            <input type="text" id="gen-telefono" placeholder="WhatsApp" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                        </div>
+                        <div>
+                            <input type="text" id="gen-direccion" placeholder="Dirección de entrega o envío" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                        </div>
+                        <div>
+                            <select id="gen-pago" class="w-full bg-[#27272a] border border-gray-700 rounded-lg px-4 py-2 text-white focus:outline-none focus:border-kubo">
+                                <option value="" disabled selected>Método de Pago Preferido...</option>
+                                <option value="Efectivo / Transferencia">Efectivo / Yape / Transferencia</option>
+                                <option value="Tarjeta">Tarjeta de Crédito / Débito</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <button id="btnGenEnviar" onclick="enviarPedidoGenerador()" class="w-full bg-kubo hover:bg-purple-600 text-white font-extrabold py-3 rounded-lg mt-2 transition-all">
+                        Enviar a Ingeniería para Cotizar
+                    </button>
+                </div>
+            </div>
+
+            <div class="lg:col-span-8 flex flex-col gap-6">
+                <div class="bg-[#121214] border border-gray-800 rounded-2xl flex-grow relative overflow-hidden flex flex-col items-center justify-center min-h-[400px] shadow-inner">
+                    <div id="generador3d-container" class="absolute inset-0 cursor-move"></div>
+                </div>
+
+                <div class="bg-[#1c1c21] p-6 rounded-xl border border-gray-800 flex justify-between items-center">
+                    <div>
+                        <span class="text-xs text-gray-500 uppercase font-bold tracking-wider">Dimensiones Finales (cm)</span>
+                        <div class="text-lg font-bold text-white mt-1">
+                            <span id="gen-dims">10.0 x 6.0 x 4.0 cm</span>
+                        </div>
+                    </div>
+                    <div class="text-right border-l border-gray-700 pl-4">
+                        <span class="text-xs text-kubotext uppercase font-bold tracking-wider">Estado de Cotización</span>
+                        <div class="text-xl md:text-2xl font-extrabold text-kubo mt-1">Por Evaluar</div>
+                        <p class="text-[10px] text-gray-500 mt-1">Evaluación manual de ingeniería.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ========================================== -->
+    <!-- VISTA 4: PREGUNTAS FRECUENTES (FAQ APP) -->
     <!-- ========================================== -->
     <div id="vista-faq" class="vista-app hidden max-w-4xl mx-auto px-6 py-16 transition-opacity duration-500 min-h-[80vh]">
-        <button onclick="cambiarVista('vista-principal')" class="text-gray-400 hover:text-white mb-6 flex items-center gap-2 transition-colors">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg>
-            Volver al inicio
-        </button>
+        <div class="mb-6 flex justify-start">
+            <button onclick="cambiarVista('vista-principal')" class="inline-flex items-center gap-2 bg-gray-800 hover:bg-gray-700 text-white font-bold py-2 px-5 rounded-full transition-all shadow-md transform hover:-translate-y-1">
+                <svg width="20" height="20" fill="none" stroke="currentColor" stroke-width="2"><line x1="19" y1="12" x2="5" y2="12"></line><polyline points="12 19 5 12 12 5"></polyline></svg> 
+                Volver a Inicio
+            </button>
+        </div>
+        
         <h2 class="text-4xl font-extrabold mb-2 text-center">Centro de Ayuda</h2>
         <p class="text-kubotext text-center mb-10">Resuelve todas tus dudas antes de iniciar tu proyecto con nosotros.</p>
         
@@ -356,23 +501,15 @@
             </div>
             <div class="bg-kubocard p-6 rounded-lg border border-gray-800">
                 <h3 class="font-bold text-lg mb-2 text-white flex gap-2"><span class="text-kubo">Q.</span>¿Tengo que tener el diseño 3D ya hecho?</h3>
-                <p class="text-kubotext text-sm">No es estrictamente necesario. Si tienes una idea, un boceto o un plano técnico, nuestro equipo de ingeniería puede encargarse del modelado CAD y el diseño de la pieza desde cero antes de su impresión.</p>
+                <p class="text-kubotext text-sm">No es estrictamente necesario. En nuestro cotizador puedes elegir la opción "Quiero que me ayuden a diseñar". Sube tu boceto o PDF y nuestro equipo cotizará el servicio de diseño y modelado CAD.</p>
             </div>
             <div class="bg-kubocard p-6 rounded-lg border border-gray-800">
                 <h3 class="font-bold text-lg mb-2 text-white flex gap-2"><span class="text-kubo">Q.</span>¿Ayudan con trabajos finales de la universidad?</h3>
-                <p class="text-kubotext text-sm">Sí, es una de nuestras especialidades. Ayudamos a estudiantes a transformar sus ideas, mecanismos y tesis en prototipos funcionales y físicos, ofreciendo asesoría en el diseño para asegurar que impriman correctamente.</p>
+                <p class="text-kubotext text-sm">Sí, es una de nuestras especialidades. Ayudamos a estudiantes a transformar sus ideas, mecanismos y tesis en prototipos funcionales y físicos.</p>
             </div>
             <div class="bg-kubocard p-6 rounded-lg border border-gray-800">
                 <h3 class="font-bold text-lg mb-2 text-white flex gap-2"><span class="text-kubo">Q.</span>¿Qué tipo de materiales utilizan?</h3>
-                <p class="text-kubotext text-sm">Trabajamos con una amplia gama según tu necesidad técnica:<br>- <b>PLA:</b> Para prototipos rápidos y elementos estéticos.<br>- <b>PETG y ABS:</b> Para piezas mecánicas, engranajes, carcasas y componentes de alta resistencia térmica y física.<br>- <b>Resina:</b> Para detalles milimétricos y de extrema precisión.</p>
-            </div>
-            <div class="bg-kubocard p-6 rounded-lg border border-gray-800">
-                <h3 class="font-bold text-lg mb-2 text-white flex gap-2"><span class="text-kubo">Q.</span>¿Cuánto tiempo demora la fabricación?</h3>
-                <p class="text-kubotext text-sm">El tiempo de entrega depende del volumen y la complejidad del diseño. Piezas pequeñas o medianas suelen estar listas entre 24 a 48 horas tras la confirmación del pago.</p>
-            </div>
-            <div class="bg-kubocard p-6 rounded-lg border border-gray-800">
-                <h3 class="font-bold text-lg mb-2 text-white flex gap-2"><span class="text-kubo">Q.</span>¿Cuáles son los métodos de pago y envío?</h3>
-                <p class="text-kubotext text-sm">Aceptamos transferencias bancarias, Yape y Plin. Hacemos envíos locales y a todo el Perú mediante Olva Courier, agencias de transporte o aplicaciones de reparto directo según tu ubicación.</p>
+                <p class="text-kubotext text-sm">Trabajamos con PLA (prototipos rápidos), PETG y ABS (alta resistencia térmica y física), y Resina (detalles milimétricos).</p>
             </div>
         </div>
     </div>
@@ -386,242 +523,319 @@
         <p class="text-gray-600 text-xs">© 2026 KUBO STUDIO 3D. Diseño, Ingeniería y Fabricación Digital.</p>
     </footer>
 
-    <!-- BOTÓN FLOTANTE DE WHATSAPP (CORREGIDO LA POSICIÓN) -->
+    <!-- BOTÓN FLOTANTE DE WHATSAPP -->
     <a href="https://wa.me/51993692355" target="_blank" class="fixed bottom-28 right-6 bg-green-500 text-white p-4 rounded-full shadow-lg hover:scale-110 hover:bg-green-600 transition-all z-[90] flex items-center justify-center">
         <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"></path></svg>
     </a>
 
-    <!-- Librería de Animaciones AOS -->
+    <!-- Librerías -->
     <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
 
     <script>
-        // --- NAVEGACIÓN SPA ---
-        function cambiarVista(idVista) {
+        // --- NAVEGACIÓN Y TABS CON HISTORIAL (PARA BOTÓN ATRÁS DEL NAVEGADOR) ---
+        function cambiarVista(idVista, empujarHistorial = true) {
             document.querySelectorAll('.vista-app').forEach(el => el.classList.add('hidden'));
             document.getElementById(idVista).classList.remove('hidden');
             window.scrollTo(0, 0);
-            if(idVista === 'vista-cotizador' && renderer) {
-                renderer.setSize(document.getElementById('visor3d-container').clientWidth, document.getElementById('visor3d-container').clientHeight);
+
+            // Inyectamos el movimiento en el historial del navegador
+            if (empujarHistorial) {
+                history.pushState({ vista: idVista }, "", "#" + idVista);
             }
+            
+            // Refrescar tamaño de canvas 3D con un pequeño retraso para asegurar que el DIV ya tiene tamaño
+            setTimeout(() => {
+                if(idVista === 'vista-impresion' && rendererImp) { 
+                    rendererImp.setSize(document.getElementById('visor3d-imp').clientWidth, document.getElementById('visor3d-imp').clientHeight); 
+                }
+                if(idVista === 'vista-diseno') { 
+                    // Revisar si estamos en la pestaña del generador para encenderlo
+                    if(!document.getElementById('contenido-generador').classList.contains('hidden')) {
+                        if(!genRenderer) { initGenerator3D(); updateGeneratorBox(); }
+                        else { genRenderer.setSize(document.getElementById('generador3d-container').clientWidth, document.getElementById('generador3d-container').clientHeight); updateGeneratorBox(); } 
+                    }
+                }
+            }, 50);
         }
 
-        // --- PRELOADER Y AOS ---
-        window.addEventListener('load', function() {
-            setTimeout(function() {
-                const preloader = document.getElementById('preloader');
-                preloader.style.opacity = '0';
-                document.getElementById('cuerpo').classList.remove('overflow-hidden');
-                setTimeout(() => preloader.remove(), 700);
-            }, 2500); 
-
-            try {
-                if(document.getElementById('typed-text')){
-                    new Typed('#typed-text', {
-                        strings: ['Diseñadores e Ingenieros', 'Proyectos Universitarios', 'Desarrollo IoT', 'Prototipado Industrial'],
-                        typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true, showCursor: true, cursorChar: '|'
-                    });
-                }
-                setTimeout(function() { AOS.init({ once: true, offset: 50, duration: 800, easing: 'ease-out-cubic' }); }, 2700);
-            } catch(e) {}
+        // --- MAGIA: ESTO HACE QUE EL BOTÓN ATRÁS DEL NAVEGADOR FUNCIONE ---
+        window.addEventListener('popstate', function(event) {
+            if (event.state && event.state.vista) {
+                cambiarVista(event.state.vista, false);
+            } else {
+                cambiarVista('vista-principal', false);
+            }
         });
 
-        // --- SELECTORES DE MATERIAL Y COLOR ---
-        const multiplicadorMaterial = { "PLA": 1, "PETG": 1.2, "ABS": 1.3, "Resina": 2.5 };
-        
-        function seleccionarMaterial(materialSeleccionado, elementoHTML) {
-            document.getElementById('materialOculto').value = materialSeleccionado;
-            document.querySelectorAll('.mat-card').forEach(t => {
-                t.classList.remove('border-kubo', 'bg-kubo/10');
-                t.classList.add('border-gray-800', 'bg-[#27272a]');
-            });
-            elementoHTML.classList.remove('border-gray-800', 'bg-[#27272a]');
-            elementoHTML.classList.add('border-kubo', 'bg-kubo/10');
-            calcularPrecioGeometrico();
-        }
-
-        function cambiarColorSTL(hexColor, nombreColor, btnHTML) {
-            document.getElementById('colorOculto').value = nombreColor;
-            document.getElementById('texto-color').innerText = "Color seleccionado: " + nombreColor;
-            
-            document.querySelectorAll('.color-btn').forEach(btn => btn.classList.remove('ring-2', 'ring-white', 'scale-110'));
-            btnHTML.classList.add('ring-2', 'ring-white', 'scale-110');
-            
-            if (mesh) {
-                mesh.material.color.setHex(hexColor);
+        function switchDisenoTab(tab) {
+            const btnBoceto = document.getElementById('tab-boceto'); const btnGen = document.getElementById('tab-gen');
+            const contBoceto = document.getElementById('contenido-boceto'); const contGen = document.getElementById('contenido-generador');
+            if(tab === 'boceto') {
+                btnBoceto.className = "flex-1 py-3 text-sm md:text-lg font-bold rounded-lg bg-blue-600 text-white shadow-lg transition-all";
+                btnGen.className = "flex-1 py-3 text-sm md:text-lg font-bold rounded-lg text-gray-400 hover:text-white transition-all";
+                contBoceto.classList.remove('hidden'); contGen.classList.add('hidden');
+            } else {
+                btnGen.className = "flex-1 py-3 text-sm md:text-lg font-bold rounded-lg bg-kubo text-white shadow-lg transition-all";
+                btnBoceto.className = "flex-1 py-3 text-sm md:text-lg font-bold rounded-lg text-gray-400 hover:text-white transition-all";
+                contGen.classList.remove('hidden'); contBoceto.classList.add('hidden');
+                
+                setTimeout(() => {
+                    if(!genRenderer) { initGenerator3D(); updateGeneratorBox(); }
+                    else { genRenderer.setSize(document.getElementById('generador3d-container').clientWidth, document.getElementById('generador3d-container').clientHeight); updateGeneratorBox(); }
+                }, 50);
             }
         }
 
-        // --- MATEMÁTICAS DE ESCÁNER 3D CON CURVA LOGARÍTMICA ---
-        window.volumenSTL = 0; 
-
-        function calcularPrecioGeometrico() {
-            if (window.volumenSTL === 0) {
-                document.getElementById('precio-estimado').innerText = "S/ 0.00";
-                return;
+        window.addEventListener('load', function() {
+            // Inicializar el historial si entras directo a la página
+            if (!history.state) {
+                history.replaceState({ vista: 'vista-principal' }, "", "#vista-principal");
+            } else if (history.state.vista) {
+                 cambiarVista(history.state.vista, false);
             }
-            let matActual = document.getElementById('materialOculto').value;
-            let multMat = multiplicadorMaterial[matActual];
-            
-            // FÓRMULA CORREGIDA: Evita precios locos en piezas huecas grandes
-            // Un volumen de 17000 cm3 dará ~S/75 de costo base. Un volumen de 125 cm3 dará ~S/21.
-            let precioBaseCalculado = 15 + (Math.pow(window.volumenSTL, 0.45) * 0.8 * multMat);
-            let minPrice = Math.floor(precioBaseCalculado);
-            let maxPrice = Math.floor(precioBaseCalculado * 1.3); 
 
-            const divPrecio = document.getElementById('precio-estimado');
-            divPrecio.innerText = `S/ ${minPrice} - S/ ${maxPrice}`;
+            setTimeout(function() {
+                document.getElementById('preloader').style.opacity = '0';
+                document.getElementById('cuerpo').classList.remove('overflow-hidden');
+                setTimeout(() => document.getElementById('preloader').remove(), 700);
+            }, 2500); 
             
-            divPrecio.classList.remove('scale-110');
-            void divPrecio.offsetWidth;
-            divPrecio.classList.add('scale-110', 'transition-transform');
-            setTimeout(() => divPrecio.classList.remove('scale-110'), 200);
+            if(document.getElementById('typed-text')){
+                new Typed('#typed-text', {
+                    strings: ['Diseñadores e Ingenieros', 'Proyectos Universitarios', 'Desarrollo IoT', 'Prototipado Industrial'],
+                    typeSpeed: 50, backSpeed: 30, backDelay: 2000, loop: true, showCursor: true, cursorChar: '|'
+                });
+            }
+            try { AOS.init({ once: true, offset: 50, duration: 800 }); } catch(e) {}
+        });
+
+        // ==========================================
+        // 1. LÓGICA IMPRESIÓN (STL)
+        // ==========================================
+        let sceneImp, cameraImp, rendererImp, meshImp, controlsImp, animationIdImp;
+
+        function selMatImp(mat, btn) {
+            document.getElementById('matImpOculto').value = mat;
+            document.querySelectorAll('.mat-card-imp').forEach(t => { t.classList.remove('border-kubo', 'bg-kubo/10'); t.classList.add('border-gray-800', 'bg-[#27272a]'); });
+            btn.classList.remove('border-gray-800', 'bg-[#27272a]'); btn.classList.add('border-kubo', 'bg-kubo/10');
         }
 
-        // --- MOTOR 3D (Three.js) ---
-        let scene, camera, renderer, mesh, controls, animationId;
-        function init3DViewer(arrayBuffer) {
-            const container = document.getElementById('visor3d-container');
-            document.getElementById('loading-3d').classList.add('hidden');
-            
-            if(renderer) { container.removeChild(renderer.domElement); cancelAnimationFrame(animationId); }
+        function selColorImp(hexColor, nombreColor, btn) {
+            document.getElementById('colorImpOculto').value = nombreColor;
+            document.querySelectorAll('.color-btn-imp').forEach(b => b.classList.remove('ring-2', 'ring-white', 'scale-110'));
+            btn.classList.add('ring-2', 'ring-white', 'scale-110');
+            if (meshImp) meshImp.material.color.setHex(hexColor);
+        }
+
+        function init3DViewerImp(arrayBuffer) {
+            const container = document.getElementById('visor3d-imp');
+            document.getElementById('loading-3d-imp').classList.add('hidden');
+            if(rendererImp) { container.removeChild(rendererImp.domElement); cancelAnimationFrame(animationIdImp); }
             container.classList.remove('hidden'); 
 
-            scene = new THREE.Scene();
-            camera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
-            renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
-            renderer.setSize(container.clientWidth, container.clientHeight);
-            container.appendChild(renderer.domElement);
+            sceneImp = new THREE.Scene(); cameraImp = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            rendererImp = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            rendererImp.setSize(container.clientWidth, container.clientHeight); container.appendChild(rendererImp.domElement);
+            controlsImp = new THREE.OrbitControls(cameraImp, rendererImp.domElement); controlsImp.enableDamping = true; controlsImp.dampingFactor = 0.05;
 
-            controls = new THREE.OrbitControls(camera, renderer.domElement);
-            controls.enableDamping = true; controls.dampingFactor = 0.05;
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); sceneImp.add(ambientLight);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8); dirLight.position.set(10, 20, 10); sceneImp.add(dirLight);
 
-            const ambientLight = new THREE.AmbientLight(0xffffff, 0.6); scene.add(ambientLight);
-            const dirLight = new THREE.DirectionalLight(0xffffff, 0.8); dirLight.position.set(10, 20, 10); scene.add(dirLight);
+            const loader = new THREE.STLLoader(); const geometry = loader.parse(arrayBuffer);
+            geometry.computeBoundingBox(); const min = geometry.boundingBox.min; const max = geometry.boundingBox.max;
+            const dimX = Math.abs(max.x - min.x) / 10; const dimY = Math.abs(max.y - min.y) / 10; const dimZ = Math.abs(max.z - min.z) / 10;
+            document.getElementById('dims-imp').innerText = `${dimX.toFixed(1)} x ${dimY.toFixed(1)} x ${dimZ.toFixed(1)} cm`;
 
-            const loader = new THREE.STLLoader();
-            const geometry = loader.parse(arrayBuffer);
+            const center = new THREE.Vector3(); geometry.boundingBox.getCenter(center); geometry.translate(-center.x, -center.y, -center.z);
+            const colorInicial = document.getElementById('colorImpOculto').value;
+            const mapaColores = { "Morado Kubo": 0x7c3aed, "Blanco": 0xffffff, "Negro": 0x222222, "Gris": 0x9ca3af, "Rojo": 0xef4444, "Azul": 0x3b82f6, "Verde": 0x22c55e, "Amarillo": 0xeab308, "Naranja": 0xf97316, "Rosa": 0xec4899 };
             
-            geometry.computeBoundingBox();
-            const min = geometry.boundingBox.min;
-            const max = geometry.boundingBox.max;
-            
-            const dimX = Math.abs(max.x - min.x) / 10;
-            const dimY = Math.abs(max.y - min.y) / 10;
-            const dimZ = Math.abs(max.z - min.z) / 10;
-            
-            window.volumenSTL = dimX * dimY * dimZ; 
-            document.getElementById('stl-dims').innerText = `${dimX.toFixed(1)} x ${dimY.toFixed(1)} x ${dimZ.toFixed(1)} cm`;
-            calcularPrecioGeometrico(); 
-
-            const center = new THREE.Vector3(); geometry.boundingBox.getCenter(center);
-            geometry.translate(-center.x, -center.y, -center.z);
-
-            const colorInicial = document.getElementById('colorOculto').value;
-            const mapaColores = { 
-                "Morado Kubo": 0x7c3aed, "Blanco": 0xffffff, "Negro": 0x222222, 
-                "Gris": 0x9ca3af, "Rojo": 0xef4444, "Azul": 0x3b82f6,
-                "Verde": 0x22c55e, "Amarillo": 0xeab308, "Naranja": 0xf97316, "Rosa": 0xec4899 
-            };
-            const hexInicial = mapaColores[colorInicial] || 0x7c3aed;
-
-            const material = new THREE.MeshPhongMaterial({ color: hexInicial, specular: 0x222222, shininess: 100 });
-            mesh = new THREE.Mesh(geometry, material);
-            mesh.rotation.x = -Math.PI / 2; scene.add(mesh);
+            const material = new THREE.MeshPhongMaterial({ color: mapaColores[colorInicial], specular: 0x222222, shininess: 100 });
+            meshImp = new THREE.Mesh(geometry, material); meshImp.rotation.x = -Math.PI / 2; sceneImp.add(meshImp);
 
             const maxDim = Math.max(dimX*10, dimY*10, dimZ*10);
-            camera.position.z = maxDim * 1.5; camera.position.y = maxDim * 0.5;
+            cameraImp.position.z = maxDim * 1.5; cameraImp.position.y = maxDim * 0.5;
 
-            const animate = function () { animationId = requestAnimationFrame(animate); controls.update(); renderer.render(scene, camera); };
+            const animate = function () { animationIdImp = requestAnimationFrame(animate); controlsImp.update(); rendererImp.render(sceneImp, cameraImp); };
             animate();
         }
 
-        document.getElementById('archivo3d').addEventListener('change', function(event) {
+        document.getElementById('archivo3d-impresion').addEventListener('change', function(event) {
             const file = event.target.files[0];
-            const avisoText = document.getElementById('visor-aviso');
-
             if (file) {
-                document.getElementById('nombre-archivo-visual').innerText = "Archivo cargado: " + file.name;
-                document.getElementById('nombre-archivo-visual').classList.add('text-kubo');
-                
-                const fileName = file.name.toLowerCase();
-                if (fileName.endsWith('.stl')) {
-                    avisoText.classList.add('hidden');
-                    document.getElementById('loading-3d').classList.remove('hidden');
-                    const reader = new FileReader();
-                    reader.onload = function(e) { init3DViewer(e.target.result); };
-                    reader.readAsArrayBuffer(file);
+                document.getElementById('nombre-archivo-impresion').innerText = "Archivo cargado: " + file.name;
+                document.getElementById('nombre-archivo-impresion').classList.add('text-kubo');
+                if (file.name.toLowerCase().endsWith('.stl') || file.name.toLowerCase().endsWith('.obj')) {
+                    document.getElementById('loading-3d-imp').classList.remove('hidden');
+                    const reader = new FileReader(); reader.onload = function(e) { init3DViewerImp(e.target.result); }; reader.readAsArrayBuffer(file);
                 } else {
-                    document.getElementById('visor3d-container').classList.add('hidden');
-                    if(renderer) { renderer.domElement.remove(); renderer = null; }
-                    window.volumenSTL = 0; document.getElementById('stl-dims').innerText = "Archivo no geométrico"; calcularPrecioGeometrico();
-                    
-                    if (fileName.endsWith('.sldprt')) {
-                        avisoText.innerHTML = "¡Pieza SolidWorks detectada! Se enviará a ingeniería.";
-                    } else {
-                        avisoText.textContent = "Archivo adjunto válido para evaluación manual.";
-                    }
-                    avisoText.classList.remove('hidden');
+                    document.getElementById('visor3d-imp').classList.add('hidden'); document.getElementById('dims-imp').innerText = "Archivo no geométrico";
                 }
             }
         });
 
-        // --- ENVÍO SEGURO A GOOGLE DRIVE ---
-        function enviarPedido() {
-            const nombre = document.getElementById("nombreCliente").value;
-            const telefono = document.getElementById("telefonoCliente").value;
-            const material = document.getElementById("materialOculto").value; 
-            const colorSel = document.getElementById("colorOculto").value; 
-            const archivoInput = document.getElementById("archivo3d");
+        function enviarPedidoImpresion() {
+            const nombre = document.getElementById("nomImp").value; const telefono = document.getElementById("telImp").value;
+            const direccion = document.getElementById("dirImp").value; const pago = document.getElementById("pagoImp").value;
+            const archivoInput = document.getElementById("archivo3d-impresion");
             
-            if (!nombre || !telefono) { alert("Completa tus datos para enviarte la cotización."); return; }
-            if (archivoInput.files.length === 0) { alert("Adjunta un archivo para evaluar el requerimiento."); return; }
+            if (!nombre || !telefono || !direccion || !pago || archivoInput.files.length === 0) { alert("Completa todos los datos y adjunta el archivo."); return; }
 
-            const archivo = archivoInput.files[0];
-            const boton = document.getElementById("btnEnviar");
-            
-            boton.innerHTML = `<svg class="animate-spin h-5 w-5 text-kubodark" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"><circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle><path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path></svg> <span>Procesando en la nube...</span>`;
-            boton.classList.add("opacity-75", "cursor-not-allowed"); boton.disabled = true;
-
+            const boton = document.getElementById("btnEnviarImp"); boton.innerText = "Procesando..."; boton.disabled = true;
             const reader = new FileReader();
             reader.onload = function(e) {
-                const base64Data = e.target.result.split(',')[1];
-                const dims = document.getElementById('stl-dims').innerText;
-                const precio = document.getElementById('precio-estimado').innerText;
-                
                 const payload = {
-                    nombre: nombre, telefono: telefono, material: material, color: colorSel,
-                    archivoNombre: archivo.name, archivoMime: archivo.type || "application/octet-stream", archivoBase64: base64Data
+                    tipoPedido: "Impresión Directa (Tiene STL)",
+                    nombre: nombre, telefono: telefono, direccion: direccion, pago: pago,
+                    material: document.getElementById("matImpOculto").value, color: document.getElementById("colorImpOculto").value,
+                    archivoNombre: archivoInput.files[0].name, archivoMime: archivoInput.files[0].type || "application/octet-stream", archivoBase64: e.target.result.split(',')[1]
                 };
 
                 // <-------------------------------------------------------------------->
-                // <--- AQUI: REEMPLAZA EL TEXTO ROJO POR TU ENLACE LARGO DE GOOGLE ---->
+                // <--- AQUI: PEGA TU LINK DE GOOGLE PARA IMPRESIÓN 3D (STL) ----------->
                 // <-------------------------------------------------------------------->
-                const url_google = "https://script.google.com/macros/s/AKfycbzXY1mTKEezOW0AsQrjRnFrE_iXCT9Je57VN01HbcJaLydERpKokht16GrwAYuf1dNqOQ/exec";
+                const url_google = "PEGA_TU_LINK_DE_GOOGLE_AQUI";
 
                 fetch(url_google, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) })
-                .then(response => response.json())
-                .then(data => {
+                .then(r => r.json()).then(data => {
                     if(data.estado === "Éxito") {
-                        const mensaje = `¡Hola equipo de Kubo Studio! Acabo de enviar mi diseño 3D por la plataforma.\n\n👤 Nombre: ${nombre}\n⚙️ Material: ${material} (${colorSel})\n📐 Medidas: ${dims}\n💰 Estimado base: ${precio}\n\nQuedo atento a la evaluación técnica.`;
-                        const urlWhatsapp = `https://wa.me/51993692355?text=${encodeURIComponent(mensaje)}`;
-                        
-                        alert("¡Archivo asegurado! Serás redirigido a WhatsApp para confirmar.");
-                        document.getElementById("nombreCliente").value = ""; document.getElementById("telefonoCliente").value = "";
-                        archivoInput.value = ""; document.getElementById('nombre-archivo-visual').innerText = "Haz clic o arrastra tu archivo aquí";
-                        document.getElementById('visor3d-container').classList.add('hidden'); window.volumenSTL = 0; calcularPrecioGeometrico();
-                        
-                        window.open(urlWhatsapp, '_blank');
-                    } else { alert("Error en el servidor: " + data.error); }
-                })
-                .catch(error => { alert("Error de red. Reintenta por favor."); })
-                .finally(() => {
-                    boton.innerHTML = `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"></line><polygon points="22 2 15 22 11 13 2 9 22 2"></polygon></svg> <span>Enviar archivo a Ingeniería</span>`;
-                    boton.classList.remove("opacity-75", "cursor-not-allowed"); boton.disabled = false;
-                });
+                        const m = `¡Hola Kubo Studio! Envié un diseño 3D para imprimir.\n👤 ${nombre}\n📍 ${direccion}\n💳 ${pago}\n⚙️ ${payload.material} (${payload.color})\n📐 ${document.getElementById('dims-imp').innerText}\n\nEspero su cotización manual.`;
+                        window.open(`https://wa.me/51993692355?text=${encodeURIComponent(m)}`, '_blank');
+                    }
+                }).finally(() => { boton.innerText = "Enviar a Ingeniería para Cotizar"; boton.disabled = false; });
+            }; reader.readAsDataURL(archivoInput.files[0]);
+        }
+
+        // ==========================================
+        // 2. LÓGICA BOCETOS (DISEÑO)
+        // ==========================================
+        document.getElementById('archivo-boceto').addEventListener('change', function(event) {
+            if (event.target.files[0]) {
+                document.getElementById('nombre-boceto').innerText = "Imagen cargada: " + event.target.files[0].name;
+                document.getElementById('nombre-boceto').classList.add('text-blue-500');
+            }
+        });
+
+        function enviarPedidoBoceto() {
+            const nombre = document.getElementById("nomBoceto").value; const telefono = document.getElementById("telBoceto").value;
+            const direccion = document.getElementById("dirBoceto").value; const pago = document.getElementById("pagoBoceto").value;
+            const archivoInput = document.getElementById("archivo-boceto");
+            
+            if (!nombre || !telefono || !direccion || !pago || archivoInput.files.length === 0) { alert("Sube tu imagen y completa todos tus datos."); return; }
+
+            const boton = document.getElementById("btnEnviarBoceto"); boton.innerText = "Enviando imagen..."; boton.disabled = true;
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                const payload = {
+                    tipoPedido: "Servicio de Diseño (Boceto/Foto)",
+                    nombre: nombre, telefono: telefono, direccion: direccion, pago: pago,
+                    material: "Evaluación Diseño", color: "-",
+                    archivoNombre: archivoInput.files[0].name, archivoMime: archivoInput.files[0].type || "application/octet-stream", archivoBase64: e.target.result.split(',')[1]
+                };
+
+                // <-------------------------------------------------------------------->
+                // <--- AQUI: PEGA TU LINK DE GOOGLE PARA SUBIDA DE FOTOS/BOCETOS ------>
+                // <-------------------------------------------------------------------->
+                const url_google_boceto = "PEGA_TU_LINK_DE_GOOGLE_AQUI";
+
+                fetch(url_google_boceto, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) })
+                .then(r => r.json()).then(data => {
+                    if(data.estado === "Éxito") {
+                        const m = `¡Hola Kubo Studio! Subí un boceto/plano a la plataforma.\n👤 ${nombre}\n📍 ${direccion}\n💳 ${pago}\n🛠️ Solicito cotización para el servicio de Diseño CAD y posterior fabricación.`;
+                        window.open(`https://wa.me/51993692355?text=${encodeURIComponent(m)}`, '_blank');
+                    }
+                }).finally(() => { boton.innerText = "Solicitar Cotización de Diseño"; boton.disabled = false; });
+            }; reader.readAsDataURL(archivoInput.files[0]);
+        }
+
+        // ==========================================
+        // 3. LÓGICA GENERADOR PARAMÉTRICO 3D 
+        // ==========================================
+        let genScene, genCamera, genRenderer, genControls, genGroup, genAnimationId;
+
+        function selColorGen(hexColor, nombreColor, btnHTML) {
+            document.getElementById('colorGenOculto').value = nombreColor;
+            document.querySelectorAll('.color-btn-gen').forEach(btn => btn.classList.remove('ring-2', 'ring-white', 'scale-110'));
+            btnHTML.classList.add('ring-2', 'ring-white', 'scale-110');
+            updateGeneratorBox();
+        }
+
+        function initGenerator3D() {
+            const container = document.getElementById('generador3d-container');
+            
+            // Evitar duplicar escenas si se clickea rápido
+            if(genRenderer) return;
+
+            genScene = new THREE.Scene(); genCamera = new THREE.PerspectiveCamera(45, container.clientWidth / container.clientHeight, 0.1, 1000);
+            genRenderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+            genRenderer.setSize(container.clientWidth, container.clientHeight); container.appendChild(genRenderer.domElement);
+            genControls = new THREE.OrbitControls(genCamera, genRenderer.domElement); genControls.enableDamping = true; genControls.dampingFactor = 0.05;
+
+            const ambientLight = new THREE.AmbientLight(0xffffff, 0.7); genScene.add(ambientLight);
+            const dirLight = new THREE.DirectionalLight(0xffffff, 0.6); dirLight.position.set(50, 100, 50); genScene.add(dirLight);
+
+            const animateGen = function () { genAnimationId = requestAnimationFrame(animateGen); genControls.update(); genRenderer.render(genScene, genCamera); };
+            animateGen();
+        }
+
+        function updateGeneratorBox() {
+            // Asegurarnos de que el motor está prendido antes de dibujar
+            if(!genScene) return;
+
+            let L = parseFloat(document.getElementById('gen-largo').value); let W = parseFloat(document.getElementById('gen-ancho').value);
+            let H = parseFloat(document.getElementById('gen-alto').value); let t = parseFloat(document.getElementById('gen-grosor').value);
+
+            document.getElementById('val-largo').innerText = L + " mm"; document.getElementById('val-ancho').innerText = W + " mm";
+            document.getElementById('val-alto').innerText = H + " mm"; document.getElementById('val-grosor').innerText = t.toFixed(1) + " mm";
+            document.getElementById('gen-dims').innerText = `${(L/10).toFixed(1)} x ${(W/10).toFixed(1)} x ${((H+t)/10).toFixed(1)} cm`;
+
+            if(genGroup) genScene.remove(genGroup); genGroup = new THREE.Group();
+            
+            const colorName = document.getElementById('colorGenOculto').value;
+            const mapaColores = { "Morado Kubo": 0x7c3aed, "Blanco": 0xffffff, "Negro": 0x222222, "Gris": 0x9ca3af, "Rojo": 0xef4444, "Azul": 0x3b82f6, "Verde": 0x22c55e, "Amarillo": 0xeab308, "Naranja": 0xf97316, "Rosa": 0xec4899 };
+            let mat = new THREE.MeshPhongMaterial({ color: mapaColores[colorName] || 0x7c3aed, specular: 0x555555, shininess: 30, transparent: true, opacity: 0.9, side: THREE.DoubleSide });
+
+            let geoBase = new THREE.BoxGeometry(L, t, W); let meshBase = new THREE.Mesh(geoBase, mat); meshBase.position.set(0, t/2, 0); genGroup.add(meshBase);
+            let geoF = new THREE.BoxGeometry(L, H, t); let meshF = new THREE.Mesh(geoF, mat); meshF.position.set(0, H/2, W/2 - t/2); genGroup.add(meshF);
+            let geoB = new THREE.BoxGeometry(L, H, t); let meshB = new THREE.Mesh(geoB, mat); meshB.position.set(0, H/2, -W/2 + t/2); genGroup.add(meshB);
+            let geoL = new THREE.BoxGeometry(t, H, W - 2*t); let meshL = new THREE.Mesh(geoL, mat); meshL.position.set(-L/2 + t/2, H/2, 0); genGroup.add(meshL);
+            let geoR = new THREE.BoxGeometry(t, H, W - 2*t); let meshR = new THREE.Mesh(geoR, mat); meshR.position.set(L/2 - t/2, H/2, 0); genGroup.add(meshR);
+
+            let geoTop = new THREE.BoxGeometry(L, t, W); let meshTop = new THREE.Mesh(geoTop, mat); meshTop.position.set(0, H + 15, 0); genGroup.add(meshTop);
+            genGroup.position.y = -H/2; genScene.add(genGroup);
+
+            const maxDim = Math.max(L, W, H); genCamera.position.set(maxDim, maxDim*1.2, maxDim*1.5); genCamera.lookAt(0,0,0);
+        }
+
+        function enviarPedidoGenerador() {
+            const nombre = document.getElementById("gen-nombre").value; const telefono = document.getElementById("gen-telefono").value;
+            const direccion = document.getElementById("gen-direccion").value; const pago = document.getElementById("gen-pago").value;
+            if (!nombre || !telefono || !direccion || !pago) { alert("Completa todos tus datos de contacto, dirección y pago."); return; }
+
+            const L = document.getElementById('gen-largo').value; const W = document.getElementById('gen-ancho').value;
+            const H = document.getElementById('gen-alto').value; const t = document.getElementById('gen-grosor').value;
+            const mat = document.getElementById('gen-material').value; const color = document.getElementById('colorGenOculto').value;
+
+            const boton = document.getElementById("btnGenEnviar"); boton.innerText = "Procesando..."; boton.disabled = true;
+            const payload = {
+                tipoPedido: "Generador Automático de Carcasas",
+                nombre: nombre, telefono: telefono, direccion: direccion, pago: pago, material: mat, color: color,
+                archivoNombre: `Carcasa_${L}x${W}x${H}mm_ConTapa.txt`, archivoMime: "text/plain", archivoBase64: btoa(`Carcasa automática:\nLargo: ${L}mm\nAncho: ${W}mm\nAlto: ${H}mm\nGrosor: ${t}mm\nMaterial: ${mat}\nColor: ${color}`)
             };
-            reader.readAsDataURL(archivo);
+
+            // <-------------------------------------------------------------------->
+            // <--- AQUI: PEGA TU LINK DE GOOGLE PARA EL GENERADOR PARAMÉTRICO ----->
+            // <-------------------------------------------------------------------->
+            const url_google_gen = "PEGA_TU_LINK_DE_GOOGLE_AQUI";
+
+            fetch(url_google_gen, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) })
+            .then(r => r.json()).then(data => {
+                if(data.estado === "Éxito") {
+                    const m = `¡Hola Kubo Studio! He generado una carcasa en la web.\n\n👤 ${nombre}\n📍 ${direccion}\n💳 ${pago}\n📐 ${L}x${W}x${H}mm (Pared: ${t}mm)\n⚙️ ${mat} (${color})\n📦 INCLUYE TAPA\n\nQuiero su evaluación manual.`;
+                    window.open(`https://wa.me/51993692355?text=${encodeURIComponent(m)}`, '_blank');
+                }
+            }).finally(() => { boton.innerText = "Enviar a Ingeniería para Cotizar"; boton.disabled = false; });
         }
     </script>
 </body>
-</html>
 </html>
