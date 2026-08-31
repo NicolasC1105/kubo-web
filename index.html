@@ -694,7 +694,7 @@
                 // <-------------------------------------------------------------------->
                 // <--- AQUI: PEGA TU LINK DE GOOGLE PARA IMPRESIÓN 3D (STL) ----------->
                 // <-------------------------------------------------------------------->
-                const url_google = "PEGA_TU_LINK_DE_GOOGLE_AQUI";
+                const url_google = "https://script.google.com/macros/s/AKfycbxGST06Dg__EqV2iZk0OWe_5EIjkvi31h-uyaCEXwlg1zwGTN6hhVWFwm4c87BQ6VXemw/exec";
 
                 fetch(url_google, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) })
                 .then(r => r.json()).then(data => {
@@ -736,7 +736,7 @@
                 // <-------------------------------------------------------------------->
                 // <--- AQUI: PEGA TU LINK DE GOOGLE PARA SUBIDA DE FOTOS/BOCETOS ------>
                 // <-------------------------------------------------------------------->
-                const url_google_boceto = "AKfycbxGST06Dg__EqV2iZk0OWe_5EIjkvi31h-uyaCEXwlg1zwGTN6hhVWFwm4c87BQ6VXemw";
+                const url_google_boceto = "https://script.google.com/macros/s/AKfycbxGST06Dg__EqV2iZk0OWe_5EIjkvi31h-uyaCEXwlg1zwGTN6hhVWFwm4c87BQ6VXemw/exec";
 
                 fetch(url_google_boceto, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) })
                 .then(r => r.json()).then(data => {
@@ -826,7 +826,7 @@
             // <-------------------------------------------------------------------->
             // <--- AQUI: PEGA TU LINK DE GOOGLE PARA EL GENERADOR PARAMÉTRICO ----->
             // <-------------------------------------------------------------------->
-            const url_google_gen = "PEGA_TU_LINK_DE_GOOGLE_AQUI";
+            const url_google_gen = "https://script.google.com/macros/s/AKfycbxGST06Dg__EqV2iZk0OWe_5EIjkvi31h-uyaCEXwlg1zwGTN6hhVWFwm4c87BQ6VXemw/exec";
 
             fetch(url_google_gen, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify(payload) })
             .then(r => r.json()).then(data => {
